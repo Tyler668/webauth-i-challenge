@@ -13,21 +13,25 @@ server.get('/', (req, res) => {
 });
 
 server.post('/api/register', (req, res) => {
-  let user = req.body;
-
-  const hash = bcrypt.hashSync(user.password, 8);
-
-  user.password = hash;
-
-  Users.add(user)
-    .then(saved => {
-      res.status(201).json(saved);
-    })
-    .catch(error => {
-      res.status(500).json(error);
-    });
-});
-
+    let user = req.body;
+  
+    // validate the user
+  
+    // hash the password
+    const hash = bcrypt.hashSync(user.password, 8);
+  
+    // we override the password with the hash
+    user.password = hash;
+  
+    Users.add(user)
+      .then(saved => {
+        res.status(201).json(saved);
+      })
+      .catch(error => {
+        res.status(500).json(error);
+      });
+  });
+  
 server.post('/api/login', (req, res) => {
   let { username, password } = req.body;
 

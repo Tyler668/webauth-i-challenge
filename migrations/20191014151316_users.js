@@ -3,8 +3,7 @@ exports.up = function (knex) {
         users.increments();
         users
             .string('username', 128)
-            .notNullable()
-            .unique();
+            .notNullable();
         users.string('password', 128).notNullable();
     });
 };
